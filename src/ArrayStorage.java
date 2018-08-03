@@ -20,12 +20,11 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        Resume resume;
 
         if (check(uuid)) {
             for (int i = 0; i < size; i++) {
                 if (uuid.equals(storage[i].uuid)) {
-                    resume = storage[i];
+                    return storage[i];
                 }
             }
         } else {
