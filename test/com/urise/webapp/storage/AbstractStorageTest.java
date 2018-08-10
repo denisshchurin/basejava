@@ -84,9 +84,12 @@ public abstract class AbstractStorageTest {
     @Test(expected = StorageException.class)
     public void getOverflow() throws Exception {
 
-        for (int i = 3; i < STORAGE_LIMIT; i++) {
-            storage.save(new Resume("uuid" + i + 1));
-            Assert.fail("StorageException");
+        try {
+            for (int i = 3; i < STORAGE_LIMIT; i++) {
+                storage.save(new Resume("uuid" + i + 1));
+            }
+        } catch (StorageException e) {
+            Assert.fail("StorageException before storage overflow");
         }
         storage.save(new Resume("uuid10001"));
     }

@@ -1,4 +1,5 @@
 package com.urise.webapp.storage;
 
-public class AbstractStorage implements Storage {
+public abstract class AbstractStorage implements Storage {
+
 }
