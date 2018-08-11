@@ -69,7 +69,8 @@ public abstract class AbstractStorageTest {
     @Test
     public void delete() throws Exception {
         storage.delete(UUID_1);
-        Assert.assertEquals(2, storage.size());
+        Assert.assertEquals(resume2, storage.get(UUID_2));
+        Assert.assertEquals(resume3, storage.get(UUID_3));
     }
 
     @Test
