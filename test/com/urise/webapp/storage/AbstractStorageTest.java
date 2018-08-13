@@ -70,8 +70,8 @@ public abstract class AbstractStorageTest {
     @Test
     public void delete() throws Exception {
         storage.delete(UUID_1);
-        Assert.assertEquals(resume2, storage.get(UUID_2));
-        Assert.assertEquals(resume3, storage.get(UUID_3));
+        Assert.assertNotEquals(resume1, storage.get(UUID_2));
+        Assert.assertNotEquals(resume1, storage.get(UUID_3));
     }
 
     @Test
@@ -85,7 +85,7 @@ public abstract class AbstractStorageTest {
     }
 
     @Test(expected = StorageException.class)
-    public void getOverflow() throws Exception {
+    public void saveOverflow() throws Exception {
 
         try {
             for (int i = 3; i < STORAGE_LIMIT; i++) {
