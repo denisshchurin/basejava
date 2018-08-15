@@ -50,9 +50,9 @@ public class Resume implements Comparable<Resume> {
         return uuid + '(' + fullName + ')';
     }
 
-
     @Override
     public int compareTo(Resume o) {
-        return uuid.compareTo(o.uuid);
+        int cmp = fullName.compareTo(o.fullName);
+        return cmp != 0 ? cmp : uuid.compareTo(uuid); // if fullName equals
     }
 }
