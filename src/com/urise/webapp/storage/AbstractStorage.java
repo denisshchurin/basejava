@@ -4,6 +4,9 @@ import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
+import java.util.Collections;
+import java.util.List;
+
 public abstract class AbstractStorage implements Storage {
 
     protected abstract Object getSearchKey(String uuid);
@@ -17,6 +20,8 @@ public abstract class AbstractStorage implements Storage {
     protected abstract void doDelete(Object searchKey);
 
     protected abstract Resume doGet(Object searchKey);
+
+    protected abstract List<Resume> doCopyAll();
 
     private Object getExistedSearchKey(String uuid) {
         Object searchKey = getSearchKey(uuid);
@@ -49,9 +54,15 @@ public abstract class AbstractStorage implements Storage {
         return doGet(searchKey);
     }
 
-
     public void delete(String uuid) {
         Object searchKey = getExistedSearchKey(uuid);
         doDelete(searchKey);
+    }
+
+    @Override
+    public List<Resume> getAllSorted() {
+        List<Resume> list = doCopyAll(); // чтобы исходный list не модефицировался
+        Collections.sort(list);         // получаем копию list через метод
+        return list;
     }
 }
