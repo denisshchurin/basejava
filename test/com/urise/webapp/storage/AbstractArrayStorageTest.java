@@ -1,11 +1,8 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exception.ExistStorageException;
-import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import static com.urise.webapp.storage.AbstractArrayStorage.STORAGE_LIMIT;
@@ -21,12 +18,12 @@ public abstract class AbstractArrayStorageTest extends AbstractStorageTest{
 
         try {
             for (int i = 3; i < STORAGE_LIMIT; i++) {
-                storage.save(new Resume());
+                storage.save(new Resume("Name" + i));
             }
         } catch (StorageException e) {
             Assert.fail();
         }
-        storage.save(new Resume());
+        storage.save(new Resume("Overflow"));
     }
 
     /* логика реализации теста на переполнение массива (StorageException):
