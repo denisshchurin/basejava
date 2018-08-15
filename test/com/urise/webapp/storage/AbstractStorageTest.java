@@ -11,7 +11,7 @@ import org.junit.Test;
 import static com.urise.webapp.storage.AbstractArrayStorage.STORAGE_LIMIT;
 
 public abstract class AbstractStorageTest {
-    private Storage storage;
+    protected Storage storage;
 
     public AbstractStorageTest() {
     }
@@ -102,24 +102,4 @@ public abstract class AbstractStorageTest {
     public void getNotExist() throws Exception {
         storage.get("dummy");
     }
-
-    @Test(expected = StorageException.class)
-    public void saveOverflow() throws Exception {
-
-        try {
-            for (int i = 3; i < STORAGE_LIMIT; i++) {
-                storage.save(new Resume("uuid" + i + 1));
-            }
-        } catch (StorageException e) {
-            Assert.fail("StorageException before storage overflow");
-        }
-        storage.save(new Resume("uuid10001"));
-    }
-
-    /* логика реализации теста на переполнение массива (StorageException):
-    заполняем массив, но не вызываем у него переполнение
-    если исключение вылетит раньше, чем массив будет заполнен, то тест должен провалиться (см. Assert.fail())
-    если исключение вылетает, когда пытаемся добавить в полностью заполненный массив еще одно резюме - тест пройден */
-
-
 }
